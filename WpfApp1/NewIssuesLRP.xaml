@@ -1,0 +1,62 @@
+﻿<Window x:Class="WpfApp1.NewIssuesLRP"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Создание задачи" Height="450" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        >
+
+    <Window.Resources>
+        <DataTemplate x:Key="newLrp">
+            <Border BorderBrush="Black" BorderThickness="1">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Width="200">
+                        <StackPanel Orientation="Vertical" >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="Id" Text="{Binding LID}">
+                            <Run Text="  |  "/>
+                                </TextBlock>
+                                <TextBlock x:Name="Subject" Text="{Binding MINF}"/>
+                            </StackPanel>
+                            <TextBlock x:Name="Object" Text="{Binding INF}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button x:Name="create" Content="Создать" Uid="{Binding LID}" Click="create_Click"  />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="ListNewLrp" ItemTemplate="{StaticResource newLrp}"  Grid.Column="0"/>
+
+        <StackPanel x:Name="infoIs" Grid.Column="1" Orientation="Vertical" Margin="0 0 10 10" IsEnabled="False">
+            <StackPanel>
+                <TextBox materialDesign:HintAssist.HelperText="Тема" x:Name="Tema" Margin="0 10 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+               
+                <RichTextBox materialDesign:HintAssist.HelperText="Описание" Block.LineHeight="1"  x:Name="opis" MaxHeight="200"  Style="{StaticResource MaterialDesignTextBoxBase}" VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 15 0 10">
+                <StackPanel Orientation="Vertical"  Width="200" Height="75">
+                    <DatePicker Name="inDate" materialDesign:HintAssist.HelperText="Дата начала"/>
+                    <DatePicker Name="outDate" materialDesign:HintAssist.HelperText="Дата окончания" Margin="0 10"/>
+                </StackPanel>
+                <TextBox x:Name="Lrp"  materialDesign:HintAssist.HelperText="Номер задачи в системе ТП" Margin="100 0 0 0" Width="150" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button x:Name="createIss" Content="Создать" HorizontalAlignment="Right" Click="createIss_Click"/>
+
+        </StackPanel>
+
+    </Grid>
+
+
+</Window>
