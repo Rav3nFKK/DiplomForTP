@@ -34,11 +34,11 @@ namespace WpfApp1
         public Menu(string l, string p)
         {
             InitializeComponent();
-           
+
             login = l;
             password = p;
             load();
-         
+
         }
 
         public void load()
@@ -59,7 +59,7 @@ namespace WpfApp1
         private void NewLRPbtn_Click(object sender, RoutedEventArgs e)
         {
             new NewIssuesLRP(login, password).ShowDialog();
-          
+
         }
 
         private void SLAbtn_Click(object sender, RoutedEventArgs e)
@@ -69,6 +69,9 @@ namespace WpfApp1
 
         }
 
-
+        private void settings_Click(object sender, RoutedEventArgs e)
+        {
+            new Settings().ShowDialog();
+        }
     }
 }

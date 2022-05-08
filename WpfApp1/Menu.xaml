@@ -33,7 +33,9 @@
             <StackPanel Background="#00aeef">
                 <StackPanel Orientation="Horizontal">
                     <Button MinWidth="300" MaxWidth="300" Background="#448198" x:Name="SLAbtn" Click="SLAbtn_Click" Content="SLA" FontSize="35"  Height="50"  HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    <Button Content="" MinWidth="50" MaxWidth="50" Height="50" Background="#448198" />
+                    <Button x:Name="settings"  Height="50"   Background="#448198" Padding="0" Click="settings_Click">
+                        <materialDesign:PackIcon Kind="Settings" Height="49" Width="49" Padding="0" Margin="0" />
+                    </Button>
                 </StackPanel>
                 <Button Background="#448198" x:Name="NewLRPbtn" Click="NewLRPbtn_Click" Content="Новые ЛРП" FontSize="35"  Height="50"  HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="350" MaxWidth="350" Margin="0 15"/>
                 <Button Background="#448198" x:Name="CheckFbtn" Click="CheckFbtn_Click" Content="Проверка форума" FontSize="35"  Height="50"  HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="350" MaxWidth="350" />
