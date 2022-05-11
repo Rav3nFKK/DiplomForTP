@@ -53,7 +53,7 @@ namespace WpfApp1
 
         private void CheckFbtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Модуль в разработке!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            new CheckForum().ShowDialog();
         }
 
         private void NewLRPbtn_Click(object sender, RoutedEventArgs e)

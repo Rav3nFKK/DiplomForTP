@@ -20,45 +20,51 @@ namespace WpfApp1
     /// </summary>
     public partial class Settings : Window
     {
-        public List<mailstruct> MList;
-        public struct mailstruct
-        {
-            public string MailAdress { get; set; }
-        }
-
-
         public Settings()
         {
             InitializeComponent();
+            mailList.ItemsSource = BaseConnect.BaseModel.MailsTable.ToList();
 
-            loadmail();
-
-            DataContext = MList;
         }
 
-        public void loadmail()
+        int Flag = 0;
+        private void AddMail_Click(object sender, RoutedEventArgs e)
         {
-
-            using (TextFieldParser parser = new TextFieldParser(@"mails.csv"))
+            if (Flag == 0)
             {
-                parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(",");
-                while (!parser.EndOfData)
-                {
-                    //Process row
-                    string[] fields = parser.ReadFields();
-
-                    foreach (string field in fields)
-                    {
-
-
-
-                    }
-                }
+                AddMail.Content = "Сохранить";
+                EnteredEmail.Visibility = Visibility.Visible;
+                borderr.BorderThickness = new Thickness(1);
+                Flag = 1;
+                row.Height = new GridLength(95);
+            }
+            else
+            {
+                MailsTable mailsadd = new MailsTable { Mail = EnteredEmail.Text };
+                BaseConnect.BaseModel.MailsTable.Add(mailsadd);
+                BaseConnect.BaseModel.SaveChanges();
+                mailList.ItemsSource = BaseConnect.BaseModel.MailsTable.ToList();
             }
         }
+
+        private void del_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int uid = Convert.ToInt32(button.Uid);
+            MessageBoxResult result = MessageBox.Show("Удалить данный e-mail из рассылки?", "Удаление e-mail", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (result == MessageBoxResult.Yes)
+            {
+                MailsTable delmail = BaseConnect.BaseModel.MailsTable.FirstOrDefault(x => x.Id == uid);
+                BaseConnect.BaseModel.MailsTable.Remove(delmail);
+                BaseConnect.BaseModel.SaveChanges();
+                mailList.ItemsSource = BaseConnect.BaseModel.MailsTable.ToList();
+            }
+
+        }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
     }
-
-
-
 }

@@ -5,26 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Settings" Height="500" Width="450">
+        Title="Settings" Height="500" Width="450"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        >
     <Window.Resources>
         <DataTemplate x:Key="MailSets">
             <Border BorderBrush="Black" BorderThickness="1">
-                <StackPanel>
-                    <TextBlock Text="{Binding MailAdress}"/>
-                    <Button x:Name="del" Content="Удалить"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Mail}"/>
+                    <Button x:Name="del" Content="Удалить" Click="del_Click" Uid="{Binding Id}"/>
                 </StackPanel>
             </Border>
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
+            <RowDefinition Height="35" x:Name="row"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <Button x:Name="SelectTxt" Content="Выбрать файл"/>
-            <Button x:Name="AddMail" Content="Добавить e-mail"/>
-        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="0" Name="borderr" Margin="0,0,0.2,0.2">
+            <StackPanel>
+                <Button x:Name="AddMail" Content="Добавить e-mail" Click="AddMail_Click" />
+                <TextBox x:Name="EnteredEmail" Visibility="Collapsed" materialDesign:HintAssist.Hint="Дополнительный емайл" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="5"  />
+            </StackPanel>
+        </Border>
         <ListView x:Name="mailList" ItemTemplate="{StaticResource MailSets}" Grid.Row="1"/>
+        <Button Grid.Row="3" Content="Назад" Name="GoBack" Click="GoBack_Click"/>
     </Grid>
 </Window>

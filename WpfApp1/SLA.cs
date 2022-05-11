@@ -40,7 +40,6 @@ namespace WpfApp1
         {
             login = l;
             ff();
-            GooglePush();
 
         }
 
@@ -130,7 +129,7 @@ namespace WpfApp1
             {
                 string letter1 = "Здравствуйте!\n" +
                     "Приложена ссылка на отчет с обращениями с нарушением SLA и ЛРП, приближающимся к просрочке, отчет по ЛРП без ответа более трёх дней\n\n" +
-                    "https://docs.google.com/spreadsheets/d/10HW4HAmJe48qpSZQMMSAag78KDW3z0g1ASkRO97HzKs/edit#gid=1689407417 \n\n";
+                    "https://docs.google.com/spreadsheets/d/1WcKopoNUbCz_nDzxcl7Knki9R9iVEGFWyTQ15fx_GwY/edit#gid=0 \n\n";
                 string letter2 = "";
                 if (dtSLAFirstorPros.Rows.Count < 1)
                 {
@@ -145,6 +144,7 @@ namespace WpfApp1
                     }
                 }
                 connection.Close();
+                GooglePush();
                 mail(letter1, letter2);
             }
 
@@ -310,10 +310,16 @@ namespace WpfApp1
         {
             try
             {
+                List<MailsTable> ml = BaseConnect.BaseModel.MailsTable.ToList();
+
                 string from = @"shabanin.serzh@mail.ru"; // адреса отправителя
-                string pass = "4GXvrzxn4VPVQNX9tv0T"; // пароль отправителя
+                string pass = "7S6091BMCPTVHkPtdBVj"; // пароль отправителя
                 MailMessage mess = new MailMessage();
-                mess.To.Add(@"shabanin.serzh@mail.ru"); // адрес получателя
+              
+                foreach(MailsTable m in ml)
+                {
+                    mess.To.Add(m.Mail); // адрес получателя
+                }
                 mess.From = new MailAddress(from);
                 mess.Subject = "Форум ЦСС: соблюдение SLA"; // тема
                 mess.Body = l1 + l2; // текст сообщения
